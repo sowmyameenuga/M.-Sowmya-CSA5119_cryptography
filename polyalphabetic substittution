@@ -1,0 +1,14 @@
+def vigenere_encrypt(text, key):
+    text = text.upper().replace(" ", "")
+    key = key.upper()
+    encrypted = ""
+    for i in range(len(text)):
+        t = ord(text[i]) - 65
+        k = ord(key[i % len(key)]) - 65
+        encrypted += chr((t + k) % 26 + 65)
+    return encrypted
+
+# Example usage
+text = "HELLO"
+key = "KEY"
+print("Encrypted:", vigenere_encrypt(text, key))
