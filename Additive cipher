@@ -1,0 +1,15 @@
+def additive_encrypt(text, key):
+    text = text.upper().replace(" ", "")
+    encrypted = ""
+    for char in text:
+        if char.isalpha():
+            shifted = (ord(char) - 65 + key) % 26
+            encrypted += chr(shifted + 65)
+        else:
+            encrypted += char
+    return encrypted
+
+# Example usage
+text = "HELLO"
+key = 5
+print("Encrypted:", additive_encrypt(text, key))
