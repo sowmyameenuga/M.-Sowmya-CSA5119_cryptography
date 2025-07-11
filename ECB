@@ -1,0 +1,22 @@
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad, unpad
+
+def des_ecb_encrypt(plaintext, key):
+    cipher = DES.new(key, DES.MODE_ECB)
+    padded = pad(plaintext.encode(), DES.block_size)
+    return cipher.encrypt(padded)
+
+def des_ecb_decrypt(ciphertext, key):
+    cipher = DES.new(key, DES.MODE_ECB)
+    decrypted = unpad(cipher.decrypt(ciphertext), DES.block_size)
+    return decrypted.decode()
+
+# Example usage
+key = b'8bytekey' 
+text = "HELLO ECB MODE"
+
+encrypted = des_ecb_encrypt(text, key)
+print("Encrypted (hex):", encrypted.hex())
+
+decrypted = des_ecb_decrypt(encrypted, key)
+print("Decrypted:", decrypted)
