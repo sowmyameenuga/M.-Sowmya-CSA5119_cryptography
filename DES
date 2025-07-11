@@ -1,0 +1,14 @@
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad
+
+def des_encrypt(plaintext, key):
+    des = DES.new(key, DES.MODE_ECB)
+    padded_text = pad(plaintext.encode(), DES.block_size)
+    ciphertext = des.encrypt(padded_text)
+    return ciphertext.hex()
+
+# Example usage
+key = b'8bytekey'  # DES requires 8-byte key
+text = "HELLO DES"
+encrypted = des_encrypt(text, key)
+print("Encrypted (hex):", encrypted)
