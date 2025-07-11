@@ -1,0 +1,13 @@
+def otp_encrypt(plaintext, key):
+    plaintext = plaintext.upper().replace(" ", "")
+    key = key.upper()
+    encrypted = ""
+    for p, k in zip(plaintext, key):
+        c = (ord(p) - 65 + ord(k) - 65) % 26
+        encrypted += chr(c + 65)
+    return encrypted
+
+# Example usage
+text = "HELLO"
+key  = "XMCKL"  # Must be same length as text
+print("Encrypted:", otp_encrypt(text, key))
