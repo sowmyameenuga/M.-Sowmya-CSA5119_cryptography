@@ -1,0 +1,22 @@
+from Crypto.Cipher import DES3
+from Crypto.Util.Padding import pad, unpad
+
+def triple_des_encrypt(plaintext, key):
+    cipher = DES3.new(key, DES3.MODE_ECB)
+    padded = pad(plaintext.encode(), DES3.block_size)
+    return cipher.encrypt(padded)
+
+def triple_des_decrypt(ciphertext, key):
+    cipher = DES3.new(key, DES3.MODE_ECB)
+    decrypted = unpad(cipher.decrypt(ciphertext), DES3.block_size)
+    return decrypted.decode()
+
+# Example usage
+key = b'Sixteen byte key!!'[:24]  # 16 or 24 bytes only
+text = "HELLO 3DES"
+
+encrypted = triple_des_encrypt(text, key)
+print("Encrypted (hex):", encrypted.hex())
+
+decrypted = triple_des_decrypt(encrypted, key)
+print("Decrypted:", decrypted)
