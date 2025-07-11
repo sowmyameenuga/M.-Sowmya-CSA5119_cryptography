@@ -1,0 +1,18 @@
+def monoalphabetic_encrypt(text, key_map):
+    text = text.upper()
+    encrypted = ""
+    for char in text:
+        if char.isalpha():
+            encrypted += key_map[char]
+        else:
+            encrypted += char
+    return encrypted
+
+# Example usage
+plain_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"  # Example substitution
+key_map = dict(zip(plain_alphabet, cipher_alphabet))
+
+text = "HELLO WORLD"
+encrypted = monoalphabetic_encrypt(text, key_map)
+print("Encrypted:", encrypted)
