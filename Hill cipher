@@ -1,0 +1,20 @@
+import numpy as np
+
+def hill_encrypt(text, key_matrix):
+    text = text.upper().replace(" ", "")
+    if len(text) % 2 != 0:
+        text += 'X'
+
+    text_nums = [ord(c) - 65 for c in text]
+    result = ""
+
+    for i in range(0, len(text_nums), 2):
+        pair = np.array(text_nums[i:i+2])
+        encrypted = np.dot(key_matrix, pair) % 26
+        result += ''.join(chr(num + 65) for num in encrypted)
+    return result
+
+# Example usage
+key = [[3, 3], [2, 5]]  # Invertible mod 26
+text = "HI"
+print("Encrypted:", hill_encrypt(text, key))
