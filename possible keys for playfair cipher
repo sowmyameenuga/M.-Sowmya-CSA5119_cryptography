@@ -1,0 +1,17 @@
+import random
+
+def generate_playfair_key():
+    alphabet = list("ABCDEFGHIKLMNOPQRSTUVWXYZ")  # J is excluded
+    random.shuffle(alphabet)
+    
+    key_square = [alphabet[i:i+5] for i in range(0, 25, 5)]
+    return key_square
+
+def print_key_square(square):
+    print("Playfair Key Square:")
+    for row in square:
+        print(' '.join(row))
+
+# Generate and show the key square
+key_square = generate_playfair_key()
+print_key_square(key_square)
