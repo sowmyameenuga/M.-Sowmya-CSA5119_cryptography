@@ -1,0 +1,12 @@
+from collections import Counter
+
+def letter_frequency(text):
+    text = text.upper()
+    letters_only = [c for c in text if c.isalpha()]
+    freq = Counter(letters_only)
+    for letter in sorted(freq):
+        print(f"{letter}: {freq[letter]}")
+
+# Example usage
+text = "HELLO WORLD"
+letter_frequency(text)
