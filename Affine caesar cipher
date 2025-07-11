@@ -1,0 +1,16 @@
+def affine_encrypt(text, a, b):
+    text = text.upper().replace(" ", "")
+    result = ""
+    for char in text:
+        if char.isalpha():
+            x = ord(char) - 65
+            enc = (a * x + b) % 26
+            result += chr(enc + 65)
+        else:
+            result += char
+    return result
+
+# Example usage
+text = "HELLO"
+a, b = 5, 8  # 'a' must be coprime with 26 (e.g., 1, 3, 5, 7, 9, 11...)
+print("Encrypted:", affine_encrypt(text, a, b))
