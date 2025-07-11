@@ -1,0 +1,21 @@
+from collections import Counter
+english_freq_order = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'
+
+def frequency_attack(ciphertext):
+    ciphertext = ciphertext.upper().replace(" ", "")
+    letter_counts = Counter(filter(str.isalpha, ciphertext))
+    most_common = [item[0] for item in letter_counts.most_common()]
+    
+    mapping = dict(zip(most_common, english_freq_order))
+
+    decrypted = ""
+    for char in ciphertext:
+        decrypted += mapping.get(char, char)
+    
+    return decrypted, mapping
+
+# Example usage
+ciphertext = "ITSSG VGKSR"  # Encrypted from "HELLO WORLD" using monoalphabetic cipher
+decrypted_text, map_used = frequency_attack(ciphertext)
+print("Decrypted (approx):", decrypted_text)
+print("Mapping used:", map_used)
