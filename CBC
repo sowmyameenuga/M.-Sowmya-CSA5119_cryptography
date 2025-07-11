@@ -1,0 +1,23 @@
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+
+def des_cbc_encrypt(plaintext, key, iv):
+    cipher = DES.new(key, DES.MODE_CBC, iv)
+    padded = pad(plaintext.encode(), DES.block_size)
+    return cipher.encrypt(padded)
+
+def des_cbc_decrypt(ciphertext, key, iv):
+    cipher = DES.new(key, DES.MODE_CBC, iv)
+    decrypted = unpad(cipher.decrypt(ciphertext), DES.block_size)
+    return decrypted.decode()
+
+key = b'8bytekey'             
+iv = get_random_bytes(8)      
+text = "HELLO CBC MODE"
+
+encrypted = des_cbc_encrypt(text, key, iv)
+print("Encrypted (hex):", encrypted.hex())
+
+decrypted = des_cbc_decrypt(encrypted, key, iv)
+print("Decrypted:", decrypted)
